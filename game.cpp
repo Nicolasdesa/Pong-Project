@@ -37,7 +37,7 @@ void draw() {
                 else std::cout << "|"; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
             }
             else if (j == posicaobolax && i == posicaobolay) { // Verifica se o eixo X e Y estão no meio do campo para desenhar a bola
-                std:cout << "O"; // Desenhar a bola
+                std::cout << "O"; // Desenhar a bola
             }
             else {
                 std::cout << " "; // Desenha espaço vazio quando não se encaixa em nenhum dos parâmetros acima
