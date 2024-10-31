@@ -8,9 +8,7 @@ bool gameloop = true; // Controle de loop do jogo
 const int larguraCampo = 80;
 const int alturaCampo = 20;
 int posicaoJogador1y = 4;
-int direcaoJogador1 = 0; // Usado para implementar a movimentação continua no controle do jogador1
 int posicaojogador2y = 4;
-int direcaoJogador2 = 0;
 int posicaoBolax = 10;
 int posicaoBolay = 5;
 int velocidadeBolax = 1;
@@ -49,41 +47,10 @@ void desenharJogo() {
     }
 }
 
-//Função para movimentar o jogador1
-void controlarJogador1() {
-    if (_kbhit()) { // Verifica se alguma tecla foi pressionada
-        char tecla = _getch(); // Captura a tecla pressionada
-
-        if (tecla == 72) { //72 é a setinha para cima
-            direcaoJogador1 = -1;
-        }
-        else if (tecla == 80) { // 80 é a setinha para baixo
-            direcaoJogador1 = 1;
-        }
-    }
-    else {
-        direcaoJogador1 = 0; // Jogador fica parada se nenhuma tecla for pressionada
-    }
-    // Movimentando o jogador 1 com base na direção
-    if (direcaoJogador1 == -1 && posicaoJogador1y > 0){
-        posicaoJogador1y--; // Movendo jogador1 para cima
-    }
-    else if (direcaoJogador1 == 1 && posicaoJogador1y > 0) {
-        posicaoJogador1y++; // Move o jogador1 para baixo
-    }
-}
-
-
-
-
-
-
 // Função com o jogo
 int main() {
     setup(); // Chamando a posição inicial de todos os elementos do jogo
     while(gameloop) {
         desenharJogo();
-        controlarJogador1();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Espera 100 ms
     }
 }
