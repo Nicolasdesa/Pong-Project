@@ -12,7 +12,7 @@ int posicaojogador2y = 4;
 int posicaoBolax = 10;
 int posicaoBolay = 5;
 
-void setup() { //Função para deifinir as posições padrões dos jogadores e bola
+void posiçõesIniciais() { //Função para deifinir as posições padrões dos jogadores e bola
     posicaoBolax = larguraCampo / 2; // bola irá iniciar no meio do campo
     posicaoBolay = alturaCampo / 2;
     posicaoJogador1y = alturaCampo / 2;
@@ -21,33 +21,25 @@ void setup() { //Função para deifinir as posições padrões dos jogadores e b
 
 // Função para desenhar o campo e jogadores.
 void desenharJogo() {
-    system("cls"); // Limpa a tela do terminal.
-
-    // Desenhando elementos do jogo
-    for (int i =0; i < alturaCampo; i++) { // Desenhando altura do campo
-        for (int j = 0; j < larguraCampo; j++) { // Desenhando largura do campo
-            if (j == 0) { // Verificando se o eixo X esta na posição 0 do campo para podermos desenhar o jogador1
-                if (i == posicaoJogador1y) std::cout << "|"; // Desenha o jogador1 quando chegar na metade do campo no eixo Y
-                else std::cout << " "; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
-            }
-            else if (j == larguraCampo - 1) { // Verifica se a posição X do campo esta na ultima casa para desenharmos o jogador2
-                if (i == posicaojogador2y) std::cout << "|"; // Desenha o jogador2 quando chegar na metade do campo no eixo Y
-                else std::cout << " "; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
-            }
-            else if (j == posicaoBolax && i == posicaoBolay) { // Verifica se o eixo X e Y estão no meio do campo para desenhar a bola
-                std::cout << "O"; // Desenhar a bola
-            }
-            else {
-                std::cout << " "; // Desenha espaço vazio quando não se encaixa em nenhum dos parâmetros acima
+    // Desenha o campo e jogadores
+    for (int i = 0; i < alturaCampo; i++) {
+        for (int j = 0; j < larguraCampo; j++) {
+            if (j == 0) {
+                std::cout << (i == posicaoJogador1y ? "|" : " "); // Desenha o jogador 1
+            } else if (j == larguraCampo - 1) {
+                std::cout << "|"; // Borda do jogador 2
+            } else {
+                std::cout << " "; // Espaço vazio
             }
         }
-        std::cout << "\n"; // Ao desenhar uma linha do campo pula para a próxima linha (para continuar desenhando o campo)
+        std::cout << "\n"; // Nova linha
     }
+    std::cout.flush(); // Garante que tudo seja exibido de uma vez
 }
 
 // Função com o jogo
 int main() {
-    setup(); // Chamando a posição inicial de todos os elementos do jogo
+
     while(gameloop) {
         desenharJogo();
     }
