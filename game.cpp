@@ -11,6 +11,8 @@ int posicaojogador1y = 4;
 int posicaojogador2y = 4;
 int posicaobolax = 10;
 int posicaobolay = 5;
+int velocidadebolax = 1;
+int velocidadebolay = 1;
 
 void setup() { //Função para deifinir as posições padrões dos jogadores e bola
     posicaobolax = larguradocampo / 2; // bola irá iniciar no meio do campo
