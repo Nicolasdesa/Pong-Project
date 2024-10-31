@@ -36,7 +36,7 @@ void desenharJogo() {
             }
             else if (j == larguraCampo - 1) { // Verifica se a posição X do campo esta na ultima casa para desenharmos o jogador2
                 if (i == posicaojogador2y) std::cout << "|"; // Desenha o jogador2 quando chegar na metade do campo no eixo Y
-                else std::cout << "|"; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
+                else std::cout << " "; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
             }
             else if (j == posicaoBolax && i == posicaoBolay) { // Verifica se o eixo X e Y estão no meio do campo para desenhar a bola
                 std::cout << "O"; // Desenhar a bola
@@ -84,5 +84,6 @@ int main() {
     while(gameloop) {
         desenharJogo();
         controlarJogador1();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Espera 100 ms
     }
 }
