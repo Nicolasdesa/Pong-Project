@@ -5,38 +5,40 @@
 
 //Variáveis padrões do jogo
 bool gameloop = true; // Controle de loop do jogo
-const int larguradocampo = 80;
-const int alturadocampo = 20;
-int posicaojogador1y = 4;
+const int larguraCampo = 80;
+const int alturaCampo = 20;
+int posicaoJogador1y = 4;
+int direcaoJogador1 = 0; // Usado para implementar a movimentação continua no controle do jogador1
 int posicaojogador2y = 4;
-int posicaobolax = 10;
-int posicaobolay = 5;
-int velocidadebolax = 1;
-int velocidadebolay = 1;
+int direcaoJogador2 = 0;
+int posicaoBolax = 10;
+int posicaoBolay = 5;
+int velocidadeBolax = 1;
+int velocidadeBolay = 1;
 
 void setup() { //Função para deifinir as posições padrões dos jogadores e bola
-    posicaobolax = larguradocampo / 2; // bola irá iniciar no meio do campo
-    posicaobolay = alturadocampo / 2;
-    posicaojogador1y = alturadocampo / 2;
-    posicaojogador2y = alturadocampo / 2;
+    posicaoBolax = larguraCampo / 2; // bola irá iniciar no meio do campo
+    posicaoBolay = alturaCampo / 2;
+    posicaoJogador1y = alturaCampo / 2;
+    posicaojogador2y = alturaCampo / 2;
 }
 
 // Função para desenhar o campo e jogadores.
-void draw() {
+void desenharJogo() {
     system("cls"); // Limpa a tela do terminal.
 
     // Desenhando elementos do jogo
-    for (int i =0; i < alturadocampo; i++) { // Desenhando altura do campo
-        for (int j = 0; j < larguradocampo; j++) { // Desenhando largura do campo
+    for (int i =0; i < alturaCampo; i++) { // Desenhando altura do campo
+        for (int j = 0; j < larguraCampo; j++) { // Desenhando largura do campo
             if (j == 0) { // Verificando se o eixo X esta na posição 0 do campo para podermos desenhar o jogador1
-                if (i == posicaojogador1y) std::cout << "|"; // Desenha o jogador1 quando chegar na metade do campo no eixo Y
+                if (i == posicaoJogador1y) std::cout << "|"; // Desenha o jogador1 quando chegar na metade do campo no eixo Y
                 else std::cout << " "; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
             }
-            else if (j == larguradocampo - 1) { // Verifica se a posição X do campo esta na ultima casa para desenharmos o jogador2
+            else if (j == larguraCampo - 1) { // Verifica se a posição X do campo esta na ultima casa para desenharmos o jogador2
                 if (i == posicaojogador2y) std::cout << "|"; // Desenha o jogador2 quando chegar na metade do campo no eixo Y
                 else std::cout << "|"; // Desenha espaços vazios no eixo Y quando não estiver no meio do campo
             }
-            else if (j == posicaobolax && i == posicaobolay) { // Verifica se o eixo X e Y estão no meio do campo para desenhar a bola
+            else if (j == posicaoBolax && i == posicaoBolay) { // Verifica se o eixo X e Y estão no meio do campo para desenhar a bola
                 std::cout << "O"; // Desenhar a bola
             }
             else {
@@ -47,12 +49,40 @@ void draw() {
     }
 }
 
+//Função para movimentar o jogador1
+void controlarJogador1() {
+    if (_kbhit()) { // Verifica se alguma tecla foi pressionada
+        char tecla = _getch(); // Captura a tecla pressionada
+
+        if (tecla == 72) { //72 é a setinha para cima
+            direcaoJogador1 = -1;
+        }
+        else if (tecla == 80) { // 80 é a setinha para baixo
+            direcaoJogador1 = 1;
+        }
+    }
+    else {
+        direcaoJogador1 = 0; // Jogador fica parada se nenhuma tecla for pressionada
+    }
+    // Movimentando o jogador 1 com base na direção
+    if (direcaoJogador1 == -1 && posicaoJogador1y > 0){
+        posicaoJogador1y--; // Movendo jogador1 para cima
+    }
+    else if (direcaoJogador1 == 1 && posicaoJogador1y > 0) {
+        posicaoJogador1y++; // Move o jogador1 para baixo
+    }
+}
+
+
+
+
+
+
 // Função com o jogo
 int main() {
     setup(); // Chamando a posição inicial de todos os elementos do jogo
     while(gameloop) {
-        input();
-        simulate();
-        render();
+        desenharJogo();
+        controlarJogador1();
     }
 }
