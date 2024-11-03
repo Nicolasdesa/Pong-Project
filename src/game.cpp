@@ -4,6 +4,9 @@
 
 using namespace std; // Evita o uso de 'std::' antes de cada função da biblioteca padrão.
 
+// Declaração da função definirPosicao para que o compilador a reconheça
+void definirPosicao(int x, int y);
+
 class Ponto {
 public:
     int x, y; // Coordenadas x e y.
@@ -210,15 +213,18 @@ void logica() {
     }
 }
 
-// Função principal do jogo
+// Função principal do programa (inicializa, desenha e executa o jogo).
 int main() {
-    inicializar(); // Inicializa as variáveis e a posição da bola e dos jogadores
-    while (gameLoop) { // Loop do jogo
-        desenhar(); // Desenha o campo
-        entrada(); // Movimento do jogador
-        logicaIA(); // Lógica de IA do jogador 2
-        logica(); // Lógica do movimento da bola
-        Sleep(40); // Controle de velocidade do jogo
+    inicializar();
+
+    // Loop principal do jogo.
+    while (gameLoop) {
+        desenhar();
+        entrada();
+        logicaIA();
+        logica();
+        Sleep(50); // Pausa breve para controle de velocidade.
     }
-    return 0; // Finaliza o programa
+
+    return 0;
 }
